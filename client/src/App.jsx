@@ -2,10 +2,12 @@ import React from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import "./App.css";
 import { Home, About, SignIn, SignUp, Profile } from "./pages";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<SignIn />} />
