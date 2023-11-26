@@ -1,0 +1,25 @@
+{
+  "name": "realestate",
+  "version": "1.0.0",
+  "description": "A real estate web app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/himanshuShukla55/realestate.git"
+  },
+  "author": "Himanshu Shukla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/himanshuShukla55/realestate/issues"
+  },
+  "homepage": "https://github.com/himanshuShukla55/realestate#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.1"
+  }
+}
