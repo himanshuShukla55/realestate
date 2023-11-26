@@ -2,7 +2,7 @@ import "./App.css";
 import React from "react";
 
 const App = () => {
-  return <div>Real Estate App</div>;
+  return <h1 className="text-3xl">Hello world!</h1>;
 };
 
 export default App;
