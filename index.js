@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors";
 
 //* importing db connection
 import { connection } from "./config/db.js";
@@ -11,11 +10,10 @@ dotenv.config();
 const app = express();
 
 //* applying middlewares
-app.use(cors());
 app.use(express.json());
 
 //* routes
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 //* applying error handler
 app.use(errorHandler);

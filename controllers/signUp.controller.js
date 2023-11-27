@@ -14,7 +14,9 @@ export const signUp = (req, res, next) => {
         email: email.toLowerCase(),
         password: hash,
       });
-      res.status(201).send("successfully signed up!");
+      res
+        .status(201)
+        .json({ success: true, message: "successfully signed in!" });
     } catch (error) {
       console.log("error in signing up!");
       next(error);
