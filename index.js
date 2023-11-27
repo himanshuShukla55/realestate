@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 //* importing db connection
 import { connection } from "./config/db.js";
@@ -10,6 +11,7 @@ dotenv.config();
 const app = express();
 
 //* applying middlewares
+app.use(cors());
 app.use(express.json());
 
 //* routes
@@ -21,6 +23,7 @@ app.use(errorHandler);
 const port = process.env.PORT || 8000;
 const url = process.env.DBURL;
 
+//*creating the server and connecting to database.
 app.listen(port, async () => {
   try {
     await connection(url);
