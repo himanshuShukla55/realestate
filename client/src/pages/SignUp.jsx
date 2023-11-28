@@ -137,7 +137,7 @@ const SignUp = () => {
       </h1>
       {badRequest && (
         <div className="max-w-md px-8 sm:px-3 mt-2 mx-auto my-0">
-          <h3 className=" bg-red-600 rounded-lg text-center text-white text-2xl m-0 p-2">
+          <h3 className=" bg-red-400 rounded-lg text-center text-white text-2xl m-0 p-2">
             Bad Request
           </h3>
         </div>

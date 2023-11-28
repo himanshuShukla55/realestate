@@ -12,7 +12,7 @@ export const signIn = async (req, res, next) => {
     if (!match) customError(401, "Invalid Credentials!");
     const token = jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET);
     res
-      .cookie("accessToken", token)
+      .cookie("accessToken", token, { httpOnly: true })
       .status(200)
       .json({
         success: true,

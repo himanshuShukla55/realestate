@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  singInFailure,
+  singInSuccess,
+} from "../redux/user/userSlice";
 
 const SignIn = () => {
   //! states
@@ -11,9 +17,10 @@ const SignIn = () => {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState({});
-  const [badRequest, setBadRequest] = useState(null);
+  const { error } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //? useEffect to validate inputs
   useEffect(() => {
@@ -70,7 +77,7 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
-    setBadRequest(null);
+    dispatch(signInStart());
     if (Object.keys(formErrors).length === 0) {
       const res = await fetch("/api/auth/signin", {
         method: "POST",
@@ -83,8 +90,11 @@ const SignIn = () => {
         }),
       });
       const data = await res.json();
-      if (!data.success) setBadRequest(data.message);
-      else console.log("signed in");
+      if (!data.success) dispatch(singInFailure(data.message));
+      else {
+        dispatch(singInSuccess(data.data));
+        navigate("/");
+      }
     }
   };
   const { email, password } = user;
@@ -93,10 +103,10 @@ const SignIn = () => {
       <h1 className="text-3xl text-center mt-7 text-slate-500 font-bold">
         Sign In
       </h1>
-      {badRequest && (
+      {error && (
         <div className="max-w-md px-8 sm:px-3 mt-2 mx-auto my-0">
-          <h3 className=" bg-red-600 rounded-lg text-center text-white  text-2xl m-0 p-2">
-            {badRequest}
+          <h3 className=" bg-red-400 rounded-lg text-center text-white  text-2xl m-0 p-2">
+            {error}
           </h3>
         </div>
       )}
