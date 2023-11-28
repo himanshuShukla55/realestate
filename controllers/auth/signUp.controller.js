@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { UsersModel } from "../models/users.model.js";
+import { UsersModel } from "../../models/users.model.js";
 
 export const signUp = (req, res, next) => {
   const { username, email, password } = req.body;
@@ -16,7 +16,7 @@ export const signUp = (req, res, next) => {
       });
       res
         .status(201)
-        .json({ success: true, message: "successfully signed in!" });
+        .json({ success: true, message: "successfully signed up!" });
     } catch (error) {
       console.log("error in signing up!");
       next(error);

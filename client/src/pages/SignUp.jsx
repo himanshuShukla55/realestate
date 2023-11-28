@@ -126,7 +126,7 @@ const SignUp = () => {
       });
       const data = await res.json();
       if (!data.success) setBadRequest(true);
-      navigate("/sign-in");
+      else navigate("/sign-in");
     }
   };
   const { username, email, password, confirmPassword } = user;
@@ -232,7 +232,7 @@ const SignUp = () => {
           SIGN UP
         </button>
       </form>
-      <div className="flex m-auto max-w-md px-8 sm:px-3 mt-5">
+      <div className="flex m-auto max-w-md px-9 sm:px-4 mt-5">
         <p>Have an account?</p>
         <Link className="mx-1 text-blue-500" to="/sign-in">
           Sign In
