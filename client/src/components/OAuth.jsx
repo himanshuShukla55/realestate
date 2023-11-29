@@ -1,6 +1,5 @@
 import React from "react";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { app } from "../utils/firebase";
+import { authenticateWithGoogle } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { singInSuccess } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +9,7 @@ const OAuth = () => {
   const navigate = useNavigate();
   const handleGoogleClick = async () => {
     try {
-      const provider = new GoogleAuthProvider();
-      const auth = getAuth(app);
-
-      const { user } = await signInWithPopup(auth, provider);
+      const { user } = await authenticateWithGoogle();
       const res = await fetch("/api/auth/google", {
         method: "POST",
         headers: {
