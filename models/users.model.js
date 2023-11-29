@@ -15,6 +15,11 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    type: String,
+    default:
+      "https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?size=626&ext=jpg",
+  },
 });
 
 export const UsersModel = model("user", UserSchema);

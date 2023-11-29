@@ -7,6 +7,7 @@ import {
   singInFailure,
   singInSuccess,
 } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
   //! states
@@ -155,6 +156,7 @@ const SignIn = () => {
         >
           SIGN IN
         </button>
+        <OAuth />
       </form>
       <div className="flex m-auto max-w-md px-9 sm:px-4 mt-5">
         <p>Don't have an account?</p>

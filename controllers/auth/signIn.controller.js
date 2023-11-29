@@ -11,17 +11,12 @@ export const signIn = async (req, res, next) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) customError(401, "Invalid Credentials!");
     const token = jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET);
-    res
-      .cookie("accessToken", token, { httpOnly: true })
-      .status(200)
-      .json({
-        success: true,
-        message: "successfully signed in!",
-        data: {
-          username: user.username,
-          email: user.email,
-        },
-      });
+    const { password: passwordHash, ...data } = user._doc;
+    res.cookie("accessToken", token, { httpOnly: true }).status(200).json({
+      success: true,
+      message: "successfully signed in!",
+      data,
+    });
   } catch (error) {
     console.log("error in signing in!");
     next(error);
