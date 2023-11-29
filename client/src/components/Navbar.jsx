@@ -34,7 +34,7 @@ const Navbar = () => {
             About
           </Link>
           <Link
-            className="hidden sm:mx-2 sm:inline text-slate-700 hover:text-slate-400"
+            className=" sm:mx-2 text-slate-700 hover:text-slate-400"
             to={currentUser ? "/profile" : "/sign-in"}
           >
             {currentUser ? (
