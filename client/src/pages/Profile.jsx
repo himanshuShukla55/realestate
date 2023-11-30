@@ -5,14 +5,20 @@ import {
   updateUserStart,
   updateUserFailure,
   updateUserSuccess,
+  deleteUserFailed,
+  deleteUserStart,
+  deleteUserSuccess,
 } from "../redux/user/userSlice.js";
 
 const Profile = () => {
+  //* getting the global state.
   const {
     currentUser: { _id, username, email, avatar },
     error,
     loading,
   } = useSelector((state) => state.user);
+
+  //! declaring state and refs.
   const fileRef = useRef(null);
   const dispatch = useDispatch();
   const [file, setFile] = useState(undefined);
@@ -20,9 +26,13 @@ const Profile = () => {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccessful, setUpdateSuccessful] = useState(false);
+
+  //* function to handle form state change
   const handleChange = ({ target: { name, value } }) => {
     setFormData({ ...formData, [name]: value });
   };
+
+  //* function to submit form.
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -44,6 +54,23 @@ const Profile = () => {
       dispatch(updateUserFailure(error.message));
     }
   };
+
+  //* function to delete a user
+  const handleDelete = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/users/delete/${_id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!data.success) dispatch(deleteUserFailed(data.message));
+      else dispatch(deleteUserSuccess());
+    } catch (error) {
+      dispatch(deleteUserFailed(error.message));
+    }
+  };
+
+  //* useEffect hook to update the avatar
   useEffect(() => {
     if (file)
       handleFileUpload(
@@ -53,6 +80,7 @@ const Profile = () => {
         setFormData
       );
   }, [file]);
+
   return (
     <div className="p-3 max-w-md mx-auto">
       <h1 className="text-3xl text-center my-7 text-slate-500 font-bold">
@@ -136,7 +164,10 @@ const Profile = () => {
         </button>
       </form>
       <div className="flex justify-between mt-5 px-1">
-        <span className="text-red-600 hover:cursor-pointer">
+        <span
+          className="text-red-600 hover:cursor-pointer"
+          onClick={handleDelete}
+        >
           Delete Account
         </span>
         <span className="text-red-600 hover:cursor-pointer">Sign Out</span>
