@@ -9,6 +9,7 @@ import { authRouter } from "./routes/auth.route.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { usersRouter } from "./routes/users.route.js";
 import { authenticate } from "./middlewares/auth.js";
+import { listingRouter } from "./routes/listing.router.js";
 
 dotenv.config();
 const app = express();
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRouter);
 app.use(authenticate);
 app.use("/api/users", usersRouter);
+app.use("/api/listing", listingRouter);
 
 //* applying error handler
 app.use(errorHandler);
