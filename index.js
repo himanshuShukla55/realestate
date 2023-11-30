@@ -1,19 +1,26 @@
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 //* importing db connection
 import { connection } from "./config/db.js";
+
 import { authRouter } from "./routes/auth.route.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import { usersRouter } from "./routes/users.route.js";
+import { authenticate } from "./middlewares/auth.js";
 
 dotenv.config();
 const app = express();
 
 //* applying middlewares
 app.use(express.json());
+app.use(cookieParser());
 
 //* routes
 app.use("/api/auth", authRouter);
+app.use(authenticate);
+app.use("/api/users", usersRouter);
 
 //* applying error handler
 app.use(errorHandler);
