@@ -101,7 +101,7 @@ const SignIn = () => {
   const { email, password } = user;
   return (
     <>
-      <h1 className="text-3xl text-center mt-7 text-slate-500 font-bold">
+      <h1 className="text-3xl text-center mt-7 text-slate-700 font-bold">
         Sign In
       </h1>
       {error && (

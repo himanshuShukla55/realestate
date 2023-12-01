@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { handleFileUpload } from "../utils/firebase.js";
 import {
   updateUserStart,
@@ -99,7 +101,7 @@ const Profile = () => {
 
   return (
     <div className="p-3 max-w-md mx-auto">
-      <h1 className="text-3xl text-center my-7 text-slate-500 font-bold">
+      <h1 className="text-3xl text-center my-7 text-slate-700 font-bold">
         Profile
       </h1>
       {error && (
@@ -178,6 +180,12 @@ const Profile = () => {
         >
           {loading ? "Loading..." : "UPDATE"}
         </button>
+        <Link
+          to="/create-listing"
+          className="bg-green-700 text-white p-3 rounded-lg text-center hover:bg-green-500"
+        >
+          CREATE LISTING
+        </Link>
       </form>
       <div className="flex justify-between mt-5 px-1">
         <span

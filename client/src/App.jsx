@@ -4,6 +4,7 @@ import "./App.css";
 import { Home, About, SignIn, SignUp, Profile } from "./pages";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
+import CreateListing from "./pages/CreateListing";
 
 const App = () => {
   return (
@@ -19,6 +20,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/create-listing"
+          element={
+            <PrivateRoute>
+              <CreateListing />
             </PrivateRoute>
           }
         />
