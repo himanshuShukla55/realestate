@@ -52,3 +52,21 @@ export const handleFileUpload = (
     }
   );
 };
+
+export const storeImage = async (file) => {
+  return new Promise((resolve, reject) => {
+    const fileName = file.name + new Date().getTime();
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (err) => reject(err),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          resolve(downloadURL);
+        });
+      }
+    );
+  });
+};
