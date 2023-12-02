@@ -31,7 +31,7 @@ const ListingSchema = new Schema(
       required: true,
     },
     furnished: {
-      type: Number,
+      type: Boolean,
       requird: true,
     },
     parking: {

@@ -20,7 +20,6 @@ app.use(cookieParser());
 
 //* routes
 app.use("/api/auth", authRouter);
-app.use(authenticate);
 app.use("/api/users", usersRouter);
 app.use("/api/listing", listingRouter);
 
