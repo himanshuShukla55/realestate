@@ -12,11 +12,13 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (searchTerm !== "")
+    if (searchTerm !== "") {
       setSearchParams((prev) => {
         prev.set("searchTerm", searchTerm);
         return prev;
       });
+      navigate(`/search?${searchParams.toString()}`);
+    }
   };
 
   useEffect(() => {
