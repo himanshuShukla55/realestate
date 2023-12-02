@@ -5,6 +5,7 @@ import { Home, About, SignIn, SignUp, Profile } from "./pages";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import CreateListing from "./pages/CreateListing";
+import Listing from "./pages/Listing";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
+        <Route to="/listint/:listingId" element={Listing} />
       </Routes>
     </BrowserRouter>
   );
