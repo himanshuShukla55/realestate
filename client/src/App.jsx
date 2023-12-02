@@ -32,7 +32,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
-        <Route to="/listint/:listingId" element={Listing} />
+        <Route path="/listing/:listingId" element={<Listing />} />
       </Routes>
     </BrowserRouter>
   );
