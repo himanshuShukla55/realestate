@@ -95,7 +95,7 @@ const Listing = () => {
                   </p>
                 )}
               </div>
-              <div className="mt-6">
+              <div className="my-6">
                 <h2 className="font-semibold text-slate-700 text-2xl">
                   About {listing.name}
                 </h2>
@@ -135,7 +135,7 @@ const Listing = () => {
                   <Contact listing={listing} />
                 ) : (
                   <button
-                    className="bg-slate-700 text-white rounded-lg p-3 hover:bg-slate-500 text-center mt-6 w-full"
+                    className="bg-slate-700 text-white rounded-lg p-3 hover:bg-slate-500 text-center w-full"
                     onClick={() => setContact(true)}
                   >
                     CONTACT LANDLORD
