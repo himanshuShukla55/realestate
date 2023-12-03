@@ -2,7 +2,7 @@ import { ListingModel } from "../../models/listing.model.js";
 
 export const getListings = async (req, res, next) => {
   try {
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 6;
     const startIndex = parseInt(req.query.startIndex) || 0;
     let offer = req.query.offer;
     let furnished = req.query.furnished;
@@ -32,7 +32,7 @@ export const getListings = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "got all listings!",
+      message: `${listings.length} listings`,
       data: listings,
     });
   } catch (error) {

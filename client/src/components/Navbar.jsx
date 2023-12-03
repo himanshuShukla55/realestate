@@ -12,19 +12,17 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (searchTerm !== "") {
-      setSearchParams((prev) => {
-        prev.set("searchTerm", searchTerm);
-        return prev;
-      });
-      navigate(`/search?${searchParams.toString()}`);
-    }
+    setSearchParams((prev) => {
+      prev.set("searchTerm", searchTerm);
+      return prev;
+    });
+    navigate(`/search?${searchParams.toString()}`);
   };
-
+  const searchTermFromParams = searchParams.get("searchTerm");
   useEffect(() => {
-    const searchTermFromParams = searchParams.get("searchTerm");
-    if (searchTermFromParams) setSearchTerm(searchTermFromParams);
-  }, []);
+    if (searchTermFromParams || searchTermFromParams === "")
+      setSearchTerm(searchTermFromParams);
+  }, [searchTermFromParams]);
 
   return (
     <header className="bg-slate-200 shadow-md">
