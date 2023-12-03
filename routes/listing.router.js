@@ -9,8 +9,6 @@ import { authenticate } from "../middlewares/auth.js";
 export const listingRouter = express.Router();
 
 listingRouter.get("/", getListings);
-
-listingRouter.use(authenticate);
-
-listingRouter.post("/create", createListing);
 listingRouter.get("/:id", getListing);
+
+listingRouter.post("/create", authenticate, createListing);

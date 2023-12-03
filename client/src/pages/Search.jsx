@@ -87,6 +87,12 @@ const Search = () => {
     try {
       setLoading(true);
       setShowMore(false);
+      if (!append && searchParams.get("startIndex")) {
+        setSearchParams((prev) => {
+          prev.delete("startIndex");
+          return prev;
+        });
+      }
       const res = await fetch(`/api/listing?${searchParams.toString()}`);
       const data = await res.json();
       if (data.data.length > 5) setShowMore(true);
