@@ -17,6 +17,17 @@ const Search = () => {
   });
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
+  const [showMore, setShowMore] = useState(false);
+  const [append, setAppend] = useState(false);
+
+  //*function to handle show more
+  const handleShowMore = () => {
+    setAppend((prev) => true);
+    setSearchParams((prev) => {
+      prev.set("startIndex", listings.length);
+      return prev;
+    });
+  };
 
   //* function to handle sidebar inputs
   const handleChange = ({ target: { name, value, checked } }) => {
@@ -42,7 +53,7 @@ const Search = () => {
       prev.set("furnished", sidebarData.furnished);
       prev.set("sort", sidebarData.sort);
       prev.set("order", sidebarData.order);
-
+      if (prev.get("startIndex")) prev.delete("startIndex");
       return prev;
     });
     navigate(`/search?${searchParams.toString()}`);
@@ -75,10 +86,14 @@ const Search = () => {
   const getListings = async () => {
     try {
       setLoading(true);
+      setShowMore(false);
       const res = await fetch(`/api/listing?${searchParams.toString()}`);
       const data = await res.json();
-      setListings(data.data);
+      if (data.data.length > 5) setShowMore(true);
+      if (append) setListings([...listings, ...data.data]);
+      else setListings(data.data);
       setLoading(false);
+      setAppend(false);
     } catch (error) {
       console.log(error);
     }
@@ -190,11 +205,11 @@ const Search = () => {
           </button>
         </form>
       </div>
-      <div className="flex-1">
-        <h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">
+      <div className="flex-1 p-7">
+        <h1 className="text-3xl font-semibold border-b text-slate-700 my-5 py-3">
           Listing Results:
         </h1>
-        <div className="p-7 flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
           {loading ? (
             <p className="text-xl text-center text-slate-700 w-full">
               Loading...
@@ -207,6 +222,16 @@ const Search = () => {
             ))
           )}
         </div>
+        {showMore && (
+          <div className="flex justify-center">
+            <button
+              onClick={handleShowMore}
+              className="py-5  text-center text-xl text-slate-700 hover:underline hover:translate-y-[-5px] transition-translate duration-500"
+            >
+              Show More
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
