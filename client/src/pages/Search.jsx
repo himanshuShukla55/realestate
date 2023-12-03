@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import ListingCard from "../components/listingCard";
+import ListingCard from "../components/ListingCard";
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
