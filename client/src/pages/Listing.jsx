@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
@@ -20,6 +20,7 @@ const Listing = () => {
 
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const [listing, setListing] = useState();
   const [loading, setLoading] = useState(false);
@@ -135,7 +136,7 @@ const Listing = () => {
                   </li>
                 </ul>
               </div>
-              {currentUser &&
+              {currentUser ? (
                 currentUser._id !== listing.userRef &&
                 (contact ? (
                   <Contact listing={listing} />
@@ -146,7 +147,15 @@ const Listing = () => {
                   >
                     CONTACT LANDLORD
                   </button>
-                ))}
+                ))
+              ) : (
+                <button
+                  className="bg-slate-700 text-white rounded-lg p-3 hover:bg-slate-500 text-center w-full"
+                  onClick={() => navigate("/sign-in")}
+                >
+                  LOGIN TO CONTACT LANDLORD
+                </button>
+              )}
             </div>
           </>
         )
